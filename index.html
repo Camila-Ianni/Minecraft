@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minecraft Knowledge Explorer & 3D Sandbox - Consumo de API REST, Manipulación de JSON y Renderizado Dinámico en el DOM">
+    <title>Minecraft Hub | Astroworld API & 3D Sandbox</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="CSS-Minecraft-main/assets/icon.png" type="image/png">
+    
+    <!-- Hojas de Estilo CSS3 Nativas -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/main-menu.css">
+    <link rel="stylesheet" href="css/explorer.css">
+</head>
+<body>
+
+    <!-- ====================================================================
+         1. PANTALLA DE INICIO CLÁSICA (MINECRAFT TITLE SCREEN / MAIN MENU)
+         ==================================================================== -->
+    <section id="main-menu-screen" aria-label="Pantalla de inicio de Minecraft">
+        <header class="menu-header">
+            <div class="mc-logo-wrapper">
+                <h1 class="mc-logo-title">MINECRAFT</h1>
+                <span id="splash-text" class="splash-text">¡Plataformas de Desarrollo 2026!</span>
+            </div>
+        </header>
+
+        <nav class="menu-buttons-container" aria-label="Opciones del Menú Principal">
+            <button id="btn-singleplayer" class="mc-btn mc-btn-large">
+                <span class="btn-icon">🗡</span> Singleplayer (Explorador API)
+            </button>
+            <button id="btn-sandbox-3d" class="mc-btn mc-btn-large">
+                <span class="btn-icon">🧱</span> Sandbox 3D (Modo Creativo)
+            </button>
+            <div class="menu-buttons-row">
+                <button id="btn-options" class="mc-btn">
+                    <span class="btn-icon">⚙</span> Opciones & IA
+                </button>
+                <button id="btn-quit" class="mc-btn">
+                    <span class="btn-icon">🚪</span> Salir
+                </button>
+            </div>
+        </nav>
+
+        <footer class="menu-footer">
+            <span>Minecraft 1.21.x / Parcial Edition</span>
+            <span><a href="https://api.astroworldmc.com" target="_blank" rel="noopener">Powered by Astroworld API</a></span>
+        </footer>
+    </section>
+
+    <!-- ====================================================================
+         2. PANTALLA PRINCIPAL: MINECRAFT KNOWLEDGE EXPLORER (ASTROWORLD API)
+         ==================================================================== -->
+    <div id="explorer-screen" class="hidden">
+        <!-- Barra de Navegación Superior -->
+        <header class="explorer-header">
+            <div class="header-container">
+                <div class="header-brand">
+                    <span class="brand-icon">⛏</span>
+                    <span class="brand-title">MINECRAFT EXPLORER</span>
+                </div>
+
+                <!-- Selector de Entidades (Mobs, Ítems, Biomas, Encantamientos) -->
+                <nav class="entity-tabs" aria-label="Categorías de datos">
+                    <button class="nav-tab-btn active" data-entity="mobs" aria-label="Ver Mobs">🧟 Mobs</button>
+                    <button class="nav-tab-btn" data-entity="items" aria-label="Ver Ítems">⚔ Ítems</button>
+                    <button class="nav-tab-btn" data-entity="biomes" aria-label="Ver Biomas">🌲 Biomas</button>
+                    <button class="nav-tab-btn" data-entity="enchantments" aria-label="Ver Encantamientos">✨ Encantamientos</button>
+                </nav>
+
+                <!-- Acciones de Cabecera -->
+                <div class="header-actions">
+                    <button id="nav-btn-sandbox" class="mc-btn mc-btn-sm" title="Abrir juego 3D">🧱 Sandbox 3D</button>
+                    <button class="mc-btn mc-btn-sm btn-return-menu" title="Volver al menú principal">⌂ Menú Principal</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sección de Filtros y Búsqueda Interactiva en Tiempo Real -->
+        <section class="controls-section" aria-label="Controles de búsqueda y filtros">
+            <div class="controls-card">
+                <div class="controls-header">
+                    <h2 class="section-title">Base de Datos de Minecraft</h2>
+                    <span id="results-count" class="results-badge" aria-live="polite">Cargando datos...</span>
+                </div>
+                <div class="controls-inputs">
+                    <!-- Caja de Búsqueda por Texto -->
+                    <div class="search-group">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="mc-input" 
+                            placeholder="Buscar por nombre, descripción o comportamiento..." 
+                            aria-label="Buscar elementos en tiempo real"
+                            autocomplete="off"
+                        >
+                        <button id="btn-clear-search" class="btn-clear" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">✖</button>
+                    </div>
+
+                    <!-- Menú Desplegable de Categoría / Tipo -->
+                    <div class="filter-group">
+                        <label id="filter-label" for="filter-select" class="filter-label">Filtrar por Tipo:</label>
+                        <select id="filter-select" class="mc-select" aria-label="Seleccionar categoría o filtro">
+                            <option value="all">Todos los elementos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contenedor Principal de Resultados y Estados de UI -->
+        <main class="main-content" id="main-content">
+            <!-- Contenedor para Estados (Loading, Empty, Error) -->
+            <div id="status-container"></div>
+
+            <!-- Grilla Dinámica de Tarjetas Renderizadas en el DOM -->
+            <div id="cards-grid" class="cards-grid" aria-live="polite"></div>
+        </main>
+
+        <!-- Pie de Página Semántico con Atribución Obligatoria -->
+        <footer class="explorer-footer">
+            <div class="footer-container">
+                <div>
+                    <strong>Plataformas de Desarrollo</strong> — Examen Parcial Práctico 2026
+                </div>
+                <div class="footer-attribution">
+                    <a href="https://api.astroworldmc.com" class="api-link" target="_blank" rel="noopener">Powered by Astroworld API</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ====================================================================
+         3. PANTALLA SANDBOX 3D (CSS MINECRAFT INTEGRADO)
+         ==================================================================== -->
+    <div id="sandbox-screen" class="hidden">
+        <div class="sandbox-toolbar">
+            <button class="mc-btn mc-btn-sm btn-return-menu">⌂ Volver al Menú</button>
+            <span class="sandbox-info">🎮 Modo Creativo 3D (HTML & CSS Puro)</span>
+            <button class="mc-btn mc-btn-sm" onclick="switchView('explorer')">🔍 Volver al Explorador</button>
+        </div>
+        <iframe src="CSS-Minecraft-main/index.html" class="sandbox-iframe" title="Minecraft 3D Sandbox"></iframe>
+    </div>
+
+    <!-- Scripts en JavaScript Vanilla Puro -->
+    <script src="js/api.js"></script>
+    <script src="js/dom.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

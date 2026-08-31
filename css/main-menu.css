@@ -1,0 +1,156 @@
+/* ==========================================================================
+   MINECRAFT CLASSIC TITLE SCREEN (MAIN MENU) - (main-menu.css)
+   ========================================================================== */
+
+#main-menu-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px 20px 20px;
+    z-index: 1000;
+    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(16, 24, 40, 0.6) 0%, rgba(5, 8, 15, 0.95) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" fill="%232b1f14"/><rect x="0" y="0" width="32" height="32" fill="%233a2a1b"/><rect x="32" y="32" width="32" height="32" fill="%23221910"/><rect x="16" y="48" width="16" height="16" fill="%231a130c"/></svg>');
+    background-size: cover, 64px 64px;
+    animation: panoramaPan 60s infinite linear;
+}
+
+@keyframes panoramaPan {
+    0% { background-position: center, 0 0; }
+    50% { background-position: center, 500px 250px; }
+    100% { background-position: center, 1000px 500px; }
+}
+
+/* Encabezado con Logo y Splash Text */
+.menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+}
+
+/* Logotipo 3D Pixelado de Minecraft */
+.mc-logo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mc-logo-title {
+    font-family: var(--mc-font-pixel);
+    font-size: clamp(32px, 6vw, 68px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b5b5b5;
+    background: linear-gradient(180deg, #d6d6d6 0%, #8c8c8c 50%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(4px 4px 0px #1a1a1a) drop-shadow(-2px -2px 0px #ffffff) drop-shadow(0 8px 16px rgba(0,0,0,0.8));
+    text-align: center;
+    position: relative;
+    user-select: none;
+}
+
+/* Splash Text Amarillo Animado */
+.splash-text {
+    position: absolute;
+    bottom: -15px;
+    right: -25px;
+    font-family: var(--mc-font-pixel);
+    font-size: clamp(11px, 2vw, 16px);
+    color: #ffff00;
+    text-shadow: 2px 2px 0px #3f3f00;
+    white-space: nowrap;
+    animation: splashBounce 1.4s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes splashBounce {
+    0% {
+        transform: rotate(-18deg) scale(0.95);
+    }
+    100% {
+        transform: rotate(-18deg) scale(1.15);
+    }
+}
+
+/* Contenedor de Botones del Menú Principal */
+.menu-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+    z-index: 5;
+}
+
+.menu-buttons-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.menu-buttons-row .mc-btn {
+    flex: 1;
+}
+
+.mc-btn-large {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 14px;
+}
+
+.btn-icon {
+    font-size: 16px;
+}
+
+/* Pie de pantalla del menú principal */
+.menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 10px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 1px 1px 0 #000000;
+    font-family: var(--mc-font-pixel);
+}
+
+.menu-footer a {
+    color: #ffffa0;
+    text-decoration: none;
+}
+.menu-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 600px) {
+    .menu-header {
+        margin-top: 10px;
+    }
+    .splash-text {
+        bottom: -25px;
+        right: 0;
+    }
+    .menu-buttons-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .menu-footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
