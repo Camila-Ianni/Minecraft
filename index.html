@@ -13,42 +13,183 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/main-menu.css">
     <link rel="stylesheet" href="css/explorer.css">
+
+    <!-- Fuentes Google & Tailwind CDN para el Rediseño de Minecraft Explorer -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#3c4b38",
+                        "surface-bright": "#393939",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#005309",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-on-surface": "#303030",
+                        "on-tertiary": "#2f3131",
+                        "on-secondary": "#532200",
+                        "outline": "#86957f",
+                        "on-surface-variant": "#bbcbb3",
+                        "tertiary-fixed": "#e3e2e2",
+                        "primary-fixed-dim": "#33e43d",
+                        "secondary": "#ffb68c",
+                        "surface": "#131313",
+                        "on-surface": "#e4e2e1",
+                        "error-container": "#93000a",
+                        "surface-variant": "#353535",
+                        "on-primary-container": "#007311",
+                        "tertiary": "#fcfcfc",
+                        "background": "#131313",
+                        "on-secondary-fixed": "#321200",
+                        "primary-container": "#55ff55",
+                        "surface-dim": "#131313",
+                        "inverse-primary": "#006e10",
+                        "secondary-fixed": "#ffdbc9",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#753401",
+                        "on-primary": "#003a04",
+                        "on-tertiary-container": "#616263",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-fixed-variant": "#753401",
+                        "on-secondary-container": "#fb9f66",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#353535",
+                        "tertiary-container": "#dfdfdf",
+                        "surface-container-low": "#1b1c1c",
+                        "surface-container": "#1f2020",
+                        "on-background": "#e4e2e1",
+                        "inverse-surface": "#e4e2e1",
+                        "primary-fixed": "#74ff6b",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "secondary-fixed-dim": "#ffb68c",
+                        "surface-tint": "#33e43d",
+                        "error": "#ffb4ab",
+                        "primary": "#f6ffef",
+                        "on-primary-fixed": "#002202"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "gutter": "16px",
+                        "pixel-unit": "4px",
+                        "margin-sm": "8px",
+                        "margin-md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["\"Press Start 2P\""],
+                        "body-lg": ["JetBrains Mono"],
+                        "headline-md": ["\"Press Start 2P\""],
+                        "headline-lg": ["\"Press Start 2P\""],
+                        "body-md": ["JetBrains Mono"],
+                        "label-lg": ["\"Press Start 2P\""],
+                        "display-lg": ["\"Press Start 2P\""],
+                        "headline-lg-mobile": ["\"Press Start 2P\""]
+                    },
+                    "fontSize": {
+                        "label-sm": ["8px", { "lineHeight": "1", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "500" }],
+                        "headline-md": ["18px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-lg": ["12px", { "lineHeight": "1", "fontWeight": "400" }],
+                        "display-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "2px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["18px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 
     <!-- ====================================================================
-         1. PANTALLA DE INICIO CLÁSICA (MINECRAFT TITLE SCREEN / MAIN MENU)
+         PANTALLA DE CARGA INICIAL ROJA (MOJANG / IANNI STUDIOS BOOT SCREEN)
+         ==================================================================== -->
+    <div id="app-boot-screen">
+        <div class="mojang-logo-wrapper">
+            <img src="img/ianni_v2.png" class="mojang-ianni-img" alt="IANNI">
+            <span class="mojang-studios-label">S T U D I O S</span>
+        </div>
+
+        <div class="mojang-progress-box">
+            <div id="mojang-boot-fill"></div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         1. PANTALLA DE INICIO CLÁSICA (MINECRAFT TITLE SCREEN - IANNI EDITION)
          ==================================================================== -->
     <section id="main-menu-screen" aria-label="Pantalla de inicio de Minecraft">
         <header class="menu-header">
             <div class="mc-logo-wrapper">
-                <h1 class="mc-logo-title">MINECRAFT</h1>
-                <span id="splash-text" class="splash-text">¡Plataformas de Desarrollo 2026!</span>
+                <img src="img/minecraft_logo.png" class="mc-logo-img" alt="Minecraft">
+                <div class="mc-edition-container">
+                    <span class="mc-edition-subtitle">IANNI EDITION</span>
+                    <span id="splash-text" class="splash-text">Also try Limbo!</span>
+                </div>
             </div>
         </header>
 
         <nav class="menu-buttons-container" aria-label="Opciones del Menú Principal">
-            <button id="btn-singleplayer" class="mc-btn mc-btn-large">
-                <span class="btn-icon">🗡</span> Singleplayer (Explorador API)
-            </button>
-            <button id="btn-sandbox-3d" class="mc-btn mc-btn-large">
-                <span class="btn-icon">🧱</span> Sandbox 3D (Modo Creativo)
-            </button>
+            <button id="btn-singleplayer" class="mc-btn mc-btn-menu">Singleplayer</button>
+            <button id="btn-multiplayer" class="mc-btn mc-btn-menu">Multiplayer</button>
+            <button id="btn-library" class="mc-btn mc-btn-menu">Library</button>
+            <button id="btn-prompts-modal" class="mc-btn mc-btn-menu">AI Prompts (Bitácora)</button>
             <div class="menu-buttons-row">
-                <button id="btn-options" class="mc-btn">
-                    <span class="btn-icon">⚙</span> Opciones & IA
-                </button>
-                <button id="btn-quit" class="mc-btn">
-                    <span class="btn-icon">🚪</span> Salir
-                </button>
+                <button id="btn-options" class="mc-btn mc-btn-menu half">Options...</button>
+                <button id="btn-quit" class="mc-btn mc-btn-menu half">Quit Game</button>
             </div>
         </nav>
 
         <footer class="menu-footer">
-            <span>Minecraft 1.21.x / Parcial Edition</span>
-            <span><a href="https://api.astroworldmc.com" target="_blank" rel="noopener">Powered by Astroworld API</a></span>
+            <span class="mc-version-label">Minecraft 1.20.2 (Ianni Edition)</span>
+            <span class="mc-copyright-label">Copyright Mojang AB. Do not distribute!</span>
         </footer>
     </section>
+
+    <!-- ====================================================================
+         1.5. PANTALLA SELECCIÓN DE SERVIDORES MULTIJUGADOR (MINECRAFT SERVER LIST)
+         ==================================================================== -->
+    <div id="server-list-screen" class="hidden">
+        <div class="server-list-panel">
+            <h1 class="server-list-title">Play Multiplayer</h1>
+            <p class="server-list-subtitle">Servidores Oficiales Disponibles en la Red</p>
+
+            <!-- Lista de Servidores (Estilo Minecraft Oficial) -->
+            <div class="server-list-box">
+                <div class="server-item selected" id="official-server-item">
+                    <div class="server-icon">🌸</div>
+                    <div class="server-details">
+                        <div class="server-name">Cherry Blossom Sanctuary (Server Oficial)</div>
+                        <div class="server-motd">Mundo Multijugador 3D — Bioma de Cerezos, Flores y Chat Real-Time</div>
+                    </div>
+                    <div class="server-status-info">
+                        <div class="server-ping">📶 12ms</div>
+                        <div class="server-count" id="server-list-count-badge">👥 1 / 8</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción de Servidor -->
+            <div class="server-list-actions">
+                <button id="btn-join-server" class="mc-btn mc-btn-menu">Join Server (Entrar al Servidor)</button>
+                <div class="menu-buttons-row">
+                    <button id="btn-direct-connect" class="mc-btn mc-btn-menu half">Direct Connection</button>
+                    <button id="btn-cancel-server-list" class="mc-btn mc-btn-menu half">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ====================================================================
          2. PANTALLA PRINCIPAL: MINECRAFT KNOWLEDGE EXPLORER (ASTROWORLD API)
@@ -62,9 +203,10 @@
                     <span class="brand-title">MINECRAFT EXPLORER</span>
                 </div>
 
-                <!-- Selector de Entidades (Mobs, Ítems, Biomas, Encantamientos) -->
+                <!-- Selector de Entidades (Mobs, Animales, Ítems, Biomas, Encantamientos) -->
                 <nav class="entity-tabs" aria-label="Categorías de datos">
                     <button class="nav-tab-btn active" data-entity="mobs" aria-label="Ver Mobs">🧟 Mobs</button>
+                    <button class="nav-tab-btn" data-entity="animals" aria-label="Ver Animales">🐾 Animales</button>
                     <button class="nav-tab-btn" data-entity="items" aria-label="Ver Ítems">⚔ Ítems</button>
                     <button class="nav-tab-btn" data-entity="biomes" aria-label="Ver Biomas">🌲 Biomas</button>
                     <button class="nav-tab-btn" data-entity="enchantments" aria-label="Ver Encantamientos">✨ Encantamientos</button>
@@ -78,46 +220,43 @@
             </div>
         </header>
 
-        <!-- Sección de Filtros y Búsqueda Interactiva en Tiempo Real -->
-        <section class="controls-section" aria-label="Controles de búsqueda y filtros">
-            <div class="controls-card">
-                <div class="controls-header">
-                    <h2 class="section-title">Base de Datos de Minecraft</h2>
-                    <span id="results-count" class="results-badge" aria-live="polite">Cargando datos...</span>
+        <!-- Contenedor Principal Rediseñado de la Base de Datos -->
+        <main class="max-w-container-max mx-auto px-margin-md py-8">
+            <div class="mc-panel p-6 flex flex-col gap-6">
+                <!-- Header Section -->
+                <div class="flex justify-between items-center border-b-4 border-surface-variant pb-4 flex-wrap gap-4">
+                    <h1 class="font-headline-lg text-headline-lg text-surface-variant uppercase">Base De Datos De Minecraft</h1>
+                    <div id="results-count" class="bg-surface-container-lowest text-on-surface-variant px-4 py-2 border-2 border-surface-variant font-label-sm text-label-sm">
+                        MOSTRANDO 76 DE 76 REGISTROS
+                    </div>
                 </div>
-                <div class="controls-inputs">
-                    <!-- Caja de Búsqueda por Texto -->
-                    <div class="search-group">
-                        <span class="search-icon" aria-hidden="true">🔍</span>
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            class="mc-input" 
-                            placeholder="Buscar por nombre, descripción o comportamiento..." 
-                            aria-label="Buscar elementos en tiempo real"
-                            autocomplete="off"
-                        >
-                        <button id="btn-clear-search" class="btn-clear" title="Limpiar búsqueda" aria-label="Limpiar búsqueda">✖</button>
-                    </div>
 
-                    <!-- Menú Desplegable de Categoría / Tipo -->
-                    <div class="filter-group">
-                        <label id="filter-label" for="filter-select" class="filter-label">Filtrar por Tipo:</label>
-                        <select id="filter-select" class="mc-select" aria-label="Seleccionar categoría o filtro">
-                            <option value="all">Todos los elementos</option>
-                        </select>
+                <!-- Search and Filter Bar -->
+                <div class="mc-inset p-4 flex flex-col md:flex-row gap-4 justify-between items-end">
+                    <div class="flex-grow w-full md:w-2/3">
+                        <div class="relative flex items-center w-full">
+                            <span class="material-symbols-outlined absolute left-3 text-surface-variant">search</span>
+                            <input id="search-input" class="mc-input w-full pl-10 pr-10 py-3 font-body-md text-white focus:outline-none" placeholder="Buscar por nombre, descripción o comportamiento..." type="text">
+                            <span id="btn-clear-search" class="material-symbols-outlined absolute right-3 text-surface-variant cursor-pointer hover:text-error">cancel</span>
+                        </div>
                     </div>
+                    <div class="w-full md:w-1/3 flex flex-col gap-1">
+                        <label id="filter-label" for="filter-select" class="font-label-sm text-label-sm text-surface-variant">FILTRAR POR TIPO:</label>
+                        <div class="relative w-full">
+                            <select id="filter-select" class="mc-input w-full appearance-none pl-3 pr-10 py-2 font-body-md focus:outline-none cursor-pointer">
+                                <option value="all">TODOS LOS ELEMENTOS</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-2 top-1/2 transform -translate-y-1/2 text-surface-variant pointer-events-none">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entities Grid Container -->
+                <div class="main-content" id="main-content">
+                    <div id="status-container"></div>
+                    <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4" aria-live="polite"></div>
                 </div>
             </div>
-        </section>
-
-        <!-- Contenedor Principal de Resultados y Estados de UI -->
-        <main class="main-content" id="main-content">
-            <!-- Contenedor para Estados (Loading, Empty, Error) -->
-            <div id="status-container"></div>
-
-            <!-- Grilla Dinámica de Tarjetas Renderizadas en el DOM -->
-            <div id="cards-grid" class="cards-grid" aria-live="polite"></div>
         </main>
 
         <!-- Pie de Página Semántico con Atribución Obligatoria -->
@@ -134,21 +273,134 @@
     </div>
 
     <!-- ====================================================================
-         3. PANTALLA SANDBOX 3D (CSS MINECRAFT INTEGRADO)
+         3. PANTALLA SANDBOX 3D (CANVAS NATIVO, CONTROLES REALES Y HERRAMIENTAS)
          ==================================================================== -->
     <div id="sandbox-screen" class="hidden">
+        <!-- Barra de Navegación del Sandbox -->
         <div class="sandbox-toolbar">
-            <button class="mc-btn mc-btn-sm btn-return-menu">⌂ Volver al Menú</button>
-            <span class="sandbox-info">🎮 Modo Creativo 3D (HTML & CSS Puro)</span>
-            <button class="mc-btn mc-btn-sm" onclick="switchView('explorer')">🔍 Volver al Explorador</button>
+            <button class="mc-btn btn-return-menu">⌂ MENÚ PRINCIPAL</button>
+            <span class="sandbox-info">🎮 MODO CREATIVO 3D — WASD + MOUSE LOOK</span>
+            <div style="display: flex; gap: 10px;">
+                <button id="btn-camera-toggle" class="mc-btn" title="Cambiar vista de cámara (F5)">📷 CÁMARA (F5)</button>
+                <button id="btn-inventory-toggle" class="mc-btn" title="Abrir paleta completa (Tecla E)">🎒 INVENTARIO (E)</button>
+                <button id="btn-new-world" class="mc-btn" title="Generar nuevo terreno">🌍 NUEVO MUNDO</button>
+                <button class="mc-btn" onclick="switchView('explorer')">🔍 EXPLORADOR API</button>
+            </div>
         </div>
-        <iframe src="CSS-Minecraft-main/index.html" class="sandbox-iframe" title="Minecraft 3D Sandbox"></iframe>
+
+        <!-- Contenedor del Canvas 3D de Three.js -->
+        <div id="sandbox-canvas-container"></div>
+
+        <!-- Mira Central en Cruz (+) -->
+        <div id="crosshair"></div>
+
+        <!-- Mano y Herramienta en Primera Persona Animada -->
+        <div id="first-person-hand">
+            <canvas id="hand-item-canvas" width="128" height="128"></canvas>
+        </div>
+
+        <!-- Hotbar e Indicadores HUD de Minecraft (Vida, Hambre, XP y 9 Ranuras) -->
+        <div id="sandbox-hotbar-container">
+            <div id="sandbox-block-tooltip">Espada de Diamante</div>
+
+            <!-- Barras de Salud (10 Corazones Rosas) y Hambre (10 Frutillas) -->
+            <div class="sandbox-hud-bars">
+                <div class="hud-hearts-container" title="20 / 20 Puntos de Vida">
+                    <span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span><span class="hud-heart">🩷</span>
+                </div>
+                <div class="hud-hunger-container" title="20 / 20 Puntos de Hambre">
+                    <span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span><span class="hud-hunger">🍓</span>
+                </div>
+            </div>
+
+            <!-- Barra de Experiencia de Enredadera de Flores (Level 30 XP Vine) -->
+            <div class="sandbox-xp-wrapper">
+                <div class="sandbox-xp-flower-vine">🌸 🌿 🌸 🌿 🌸 🌿 🌸 🌿 🌸</div>
+                <div class="sandbox-xp-bar">
+                    <div class="sandbox-xp-fill" style="width: 78%;"></div>
+                </div>
+                <span class="sandbox-xp-level">30</span>
+            </div>
+
+            <!-- Hotbar de 9 Ranuras con bisel rosado pastel -->
+            <div id="sandbox-hotbar"></div>
+        </div>
+
+        <!-- Blocker de Pantalla para Pausa / Inicio de Juego -->
+        <div id="sandbox-blocker">
+            <div id="sandbox-instructions" class="mc-panel p-6 max-w-[680px] w-[92%] flex flex-col gap-4 text-center">
+                <h1 class="font-title-lg text-[22px] text-primary font-bold mb-2 tracking-wide uppercase">¡Modo Minecraft 3D Activo!</h1>
+                <p class="font-body-md text-body-lg text-surface-variant font-semibold text-[15px]">Modo Creativo con Herramientas y Controles Reales</p>
+                
+                <div class="mc-inset p-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-left font-body-md text-[14px] text-on-surface">
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">W A S D</span> Moverse</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">RATÓN</span> Mirar en 360°</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">CLIC IZQ</span> Romper / Minar</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">CLIC DER</span> Colocar Bloque</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">ESPACIO</span> Saltar / Elevarse</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">SHIFT / C</span> Descender</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">1 - 9 / RUEDA</span> Herramienta / Bloque</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">E</span> Inventario Completo</div>
+                    <div class="flex items-center gap-2"><span class="bg-primary-container text-on-primary-container font-label-sm text-[11px] px-2 py-1 border border-on-primary-container font-bold">T / ENTER</span> Abrir Chat</div>
+                </div>
+
+                <button class="mc-btn w-full py-4 flex justify-center items-center gap-2 text-label-lg text-[14px] font-label-sm mt-2" id="btn-play-sandbox">
+                    <span class="material-symbols-outlined text-base">play_arrow</span> HACER CLIC PARA JUGAR
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal de Catálogo Completo de Herramientas y Bloques (Tecla E) -->
+        <div id="palette-modal">
+            <div id="palette-content">
+                <h2 style="font-family: var(--mc-font-pixel); font-size: 13px; color: #3f3f3f; margin-bottom: 12px;">Inventario Creativo de Herramientas y Materiales</h2>
+                <div class="palette-grid" id="palette-grid"></div>
+                <div style="text-align: right; margin-top: 14px;">
+                    <button class="mc-btn mc-btn-sm" id="btn-close-palette">Cerrar (ESC)</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scripts en JavaScript Vanilla Puro -->
+    <!-- ====================================================================
+         PANTALLA DE CARGA OFICIAL DE MUNDO MINECRAFT (WORLD LOADING FRAME)
+         ==================================================================== -->
+    <div id="world-loading-screen" class="hidden">
+        <span id="loading-percent-label">0%</span>
+        <div class="mc-loading-square-outer">
+            <div class="mc-loading-square-inner">
+                <div id="loading-square-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor del Chat Multijugador y Badge de MineSkin -->
+    <div id="mp-hud-badge">
+        <img id="player-skin-avatar" src="https://mineskin.eu/avatar/Steve/100.png" alt="MineSkin Avatar" title="Skin de Minecraft desde MineSkin.eu">
+        <div class="mp-info-col">
+            <span id="mp-player-count">🎮 JUGADORES: 1 / 8</span>
+            <div class="mp-nick-row">
+                <input type="text" id="mp-nick-input" value="Steve" placeholder="Tu Nick..." title="Cambiar nick de Minecraft">
+                <button id="mp-nick-btn" class="mc-btn mc-btn-sm">✔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Multijugador en Tiempo Real -->
+    <div id="mp-chat-container">
+        <div id="mp-chat-messages"></div>
+        <form id="mp-chat-form">
+            <input type="text" id="mp-chat-input" placeholder="Presiona Enter para chatear..." autocomplete="off">
+        </form>
+    </div>
+
+    <!-- Scripts en JavaScript Vanilla Puro, WebSocket y Three.js -->
+    <script src="js/three.min.js"></script>
+    <script src="js/sandbox.js"></script>
     <script src="js/api.js"></script>
     <script src="js/dom.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/multiplayer.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

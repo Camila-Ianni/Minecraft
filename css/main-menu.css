@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MINECRAFT CLASSIC TITLE SCREEN (MAIN MENU) - (main-menu.css)
+   MINECRAFT CLASSIC TITLE SCREEN (MAIN MENU - IANNI EDITION)
    ========================================================================== */
 
 #main-menu-screen {
@@ -11,75 +11,90 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 40px 20px 20px 20px;
+    padding: 30px 20px 16px 20px;
     z-index: 1000;
     overflow: hidden;
-    background: radial-gradient(circle at center, rgba(16, 24, 40, 0.6) 0%, rgba(5, 8, 15, 0.95) 100%),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" fill="%232b1f14"/><rect x="0" y="0" width="32" height="32" fill="%233a2a1b"/><rect x="32" y="32" width="32" height="32" fill="%23221910"/><rect x="16" y="48" width="16" height="16" fill="%231a130c"/></svg>');
-    background-size: cover, 64px 64px;
-    animation: panoramaPan 60s infinite linear;
+    background: url('../img/pink.gif') no-repeat center center / cover;
 }
 
-@keyframes panoramaPan {
-    0% { background-position: center, 0 0; }
-    50% { background-position: center, 500px 250px; }
-    100% { background-position: center, 1000px 500px; }
+#main-menu-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    pointer-events: none;
 }
 
-/* Encabezado con Logo y Splash Text */
+/* Encabezado con Logo Oficial y Subtítulo Ianni Edition */
 .menu-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    margin-top: 20px;
+    margin-top: 15px;
+    z-index: 5;
 }
 
-/* Logotipo 3D Pixelado de Minecraft */
 .mc-logo-wrapper {
     position: relative;
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.mc-logo-title {
-    font-family: var(--mc-font-pixel);
-    font-size: clamp(32px, 6vw, 68px);
-    font-weight: 900;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #b5b5b5;
-    background: linear-gradient(180deg, #d6d6d6 0%, #8c8c8c 50%, #4a4a4a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(4px 4px 0px #1a1a1a) drop-shadow(-2px -2px 0px #ffffff) drop-shadow(0 8px 16px rgba(0,0,0,0.8));
-    text-align: center;
-    position: relative;
+.mc-logo-img {
+    width: 840px;
+    max-width: 96vw;
+    height: auto;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 12px 0px rgba(0, 0, 0, 0.88));
     user-select: none;
 }
 
-/* Splash Text Amarillo Animado */
+.mc-edition-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -68px;
+    z-index: 6;
+}
+
+.mc-edition-subtitle {
+    font-family: var(--mc-font-pixel);
+    font-size: clamp(22px, 3.4vw, 36px);
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0px #000000, -3px -3px 0px #000000, 3px -3px 0px #000000, -3px 3px 0px #000000, 0 6px 12px rgba(0,0,0,0.95);
+    user-select: none;
+}
+
+/* Splash Text Amarillo Inclinado Anclado al Lado Derecho de IANNI EDITION (Fidelidad 100% Minecraft Java) */
 .splash-text {
     position: absolute;
-    bottom: -15px;
-    right: -25px;
+    left: calc(100% - 10px);
+    top: -8px;
+    transform-origin: left center;
     font-family: var(--mc-font-pixel);
-    font-size: clamp(11px, 2vw, 16px);
-    color: #ffff00;
-    text-shadow: 2px 2px 0px #3f3f00;
+    font-size: clamp(14px, 2.2vw, 22px);
+    color: #ffff55;
+    text-shadow: 2px 2px 0px #3f3f00, 3px 3px 0px #000000;
     white-space: nowrap;
-    animation: splashBounce 1.4s ease-in-out infinite alternate;
+    animation: splashBounce 1.2s ease-in-out infinite alternate;
+    transition: opacity 0.18s ease-in-out;
     pointer-events: none;
-    z-index: 10;
+    z-index: 30;
 }
 
 @keyframes splashBounce {
     0% {
-        transform: rotate(-18deg) scale(0.95);
+        transform: rotate(-20deg) scale(0.96);
     }
     100% {
-        transform: rotate(-18deg) scale(1.15);
+        transform: rotate(-20deg) scale(1.14);
     }
 }
 
@@ -89,7 +104,7 @@
     flex-direction: column;
     gap: 12px;
     width: 100%;
-    max-width: 440px;
+    max-width: 540px;
     z-index: 5;
 }
 
@@ -99,18 +114,47 @@
     width: 100%;
 }
 
-.menu-buttons-row .mc-btn {
+.mc-btn-menu {
+    width: 100%;
+    height: 58px;
+    font-family: var(--mc-font-pixel);
+    font-size: 17px;
+    font-weight: 700;
+    color: #e0e0e0;
+    text-shadow: 2px 2px 0px #000000;
+    background: #737373;
+    border: 2px solid #000000;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #373737;
+    border-bottom-color: #373737;
+    box-shadow: inset -2px -2px 0px #373737, inset 2px 2px 0px #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s ease, color 0.1s ease;
+}
+
+.mc-btn-menu.half {
     flex: 1;
 }
 
-.mc-btn-large {
-    width: 100%;
-    padding: 16px 20px;
-    font-size: 14px;
+.mc-btn-menu:hover {
+    background: #8b8b8b;
+    color: #ffffa0;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #555555;
+    border-bottom-color: #555555;
 }
 
-.btn-icon {
-    font-size: 16px;
+.mc-btn-menu:active {
+    border-top-color: #373737;
+    border-left-color: #373737;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    box-shadow: inset 2px 2px 0px #222222;
 }
 
 /* Pie de pantalla del menú principal */
@@ -119,38 +163,161 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
-    padding: 0 10px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
-    text-shadow: 1px 1px 0 #000000;
+    padding: 0 16px;
+    z-index: 5;
+}
+
+.mc-version-label,
+.mc-copyright-label {
     font-family: var(--mc-font-pixel);
+    font-size: 11px;
+    color: #ffffff;
+    text-shadow: 1px 1px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
 }
 
-.menu-footer a {
-    color: #ffffa0;
-    text-decoration: none;
-}
-.menu-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Responsividad para pantallas pequeñas */
+/* Responsividad */
 @media (max-width: 600px) {
     .menu-header {
         margin-top: 10px;
     }
     .splash-text {
-        bottom: -25px;
+        bottom: -20px;
         right: 0;
     }
-    .menu-buttons-row {
-        flex-direction: column;
-        gap: 12px;
+    .menu-buttons-container {
+        max-width: 90vw;
     }
     .menu-footer {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
         text-align: center;
     }
+}
+
+/* ==========================================================================
+   PANTALLA DE CARGA OFICIAL DE MUNDO MINECRAFT (WORLD LOADING FRAME)
+   ========================================================================== */
+#world-loading-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #1b120c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 2500;
+}
+
+#loading-percent-label {
+    font-family: var(--mc-font-pixel);
+    font-size: 22px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #000000;
+}
+
+.mc-loading-square-outer {
+    width: 150px;
+    height: 150px;
+    background: #8e8e8e;
+    border: 5px solid #000000;
+    box-shadow: inset 4px 4px 0 #555555, inset -4px -4px 0 #aaaaaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.mc-loading-square-inner {
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    border: 3px solid #2e7d32;
+    padding: 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+}
+
+#loading-square-fill {
+    width: 100%;
+    height: 0%;
+    background: #ffffff;
+    border: 2px solid #55ff55;
+    transition: height 0.08s linear;
+}
+
+/* ==========================================================================
+   PANTALLA DE CARGA INICIAL ROJA (MOJANG / IANNI STUDIOS BOOT SCREEN)
+   ========================================================================== */
+#app-boot-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ef323d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12vh 20px 10vh 20px;
+    z-index: 9999;
+    transition: opacity 0.4s ease-out;
+}
+
+#app-boot-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mojang-logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mojang-ianni-img {
+    width: 540px;
+    max-width: 84vw;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));
+    image-rendering: -webkit-optimize-contrast;
+    user-select: none;
+}
+
+.mojang-studios-label {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 16px;
+    text-transform: uppercase;
+    margin-left: 16px;
+    user-select: none;
+}
+
+.mojang-progress-box {
+    width: 520px;
+    max-width: 86vw;
+    height: 16px;
+    border: 2px solid #ffffff;
+    background: transparent;
+    padding: 2px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+#mojang-boot-fill {
+    width: 0%;
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.05s linear;
 }
